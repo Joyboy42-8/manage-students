@@ -33,7 +33,7 @@ displayStudents = async () => {
         tableItem.innerHTML = `
             <td class="px-5 text-slate-600 italic">${student.id}</td>
             <td class="px-5">${student.name}</td>
-            <td class="px-5 grid grid-cols-2 gap-2 ">
+            <td class="px-5 grid grid-cols-1 sm:grid-cols-2 gap-2 ">
                 ${
                     student.notes.length > 0 
                     ?
@@ -48,7 +48,7 @@ displayStudents = async () => {
                 }
             </td>
             <td class="px-5">${student.notes.length > 0 ? moyenne(student.notes).toFixed(2) : "N/A"}</td>
-            <td class="flex items-center justify-end gap-3 p-3">
+            <td class="flex sm:flex-col items-center justify-end gap-3 p-3">
                 <button class="text-black bg-green-300 rounded-md px-2 py-1 hover:bg-green-400" onclick="addNote(${student.id})">Ajouter Note</button>
                 <button class="text-black bg-red-300 rounded-md px-2 py-1 hover:bg-red-400" onclick="if (confirm('Voulez-vous vraiment supprimer cet étudiant ?')) { deleteStudent(${student.id}) }">Supprimer</button>
             </td>
