@@ -18,7 +18,7 @@ const moyenne = (notes) => {
 displayStudents = async () => {
     const tableBody = document.getElementById("studentTableBody")
     tableBody.innerHTML = ""
-    const response = await fetch("http://localhost:3000/students")
+    const response = await fetch("/students")
     const students = await response.json()
     countStudents = students.length
     countBadge.innerText = countStudents
@@ -68,7 +68,7 @@ const addStudent = async () => {
     let name = document.getElementById("name").value
     const fullName = prename + " " + name
 
-    await fetch("http://localhost:3000/students", {
+    await fetch("/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: fullName })
@@ -80,7 +80,7 @@ const addStudent = async () => {
 }
 
 const deleteStudent = async (id) => {
-    await fetch(`http://localhost:3000/students/${id}`, {
+    await fetch(`/students/${id}`, {
         method: "DELETE"
     })
     displayStudents()
@@ -92,7 +92,7 @@ form.addEventListener("submit", (e) => {
 })
 
 const addNote = async (id) => {
-    const response = await fetch("http://localhost:3000/students")
+    const response = await fetch("/students")
     const students = await response.json()
     const student = students.find(s => s.id === id)
     let addedNote = prompt(`Entrez la note à ajouter pour ${student.name} :`)
@@ -100,7 +100,7 @@ const addNote = async (id) => {
         return;
     }
 
-    await fetch(`http://localhost:3000/students/${id}/notes`, {
+    await fetch(`/students/${id}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ note: Number(addedNote) })
@@ -110,7 +110,7 @@ const addNote = async (id) => {
 }
 
 const deleteNote = async (id, noteIndex) => {
-    await fetch(`http://localhost:3000/students/${id}/notes/${noteIndex}`, {
+    await fetch(`/students/${id}/notes/${noteIndex}`, {
         method: "DELETE"
     })
 
