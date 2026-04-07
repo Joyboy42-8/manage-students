@@ -1,0 +1,27 @@
+{
+  "students": [
+    {
+      "id": 1775502199455,
+      "name": "Lucas Isagi",
+      "notes": [
+        10,
+        10
+      ]
+    },
+    {
+      "id": 1775503105781,
+      "name": "Joyboy Dupont",
+      "notes": [
+        20,
+        12
+      ]
+    },
+    {
+      "id": 1775512266560,
+      "name": "Any Spiderman",
+      "notes": [
+        20
+      ]
+    }
+  ]
+}

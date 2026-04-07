@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des élèves</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+</head>
+<body class="min-h-screen bg-slate-950 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(59,130,246,0.25),transparent)] font-sans text-slate-100 antialiased">
+  <div class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <header class="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-sm font-medium uppercase tracking-widest text-blue-400/90">CRUD</p>
+        <h1 class="mt-1 text-3xl font-bold tracking-tight text-white sm:text-4xl">Élèves</h1>
+        <p class="mt-2 max-w-xl text-sm text-slate-400">Ajoutez, modifiez ou supprimez des fiches. Tout est enregistré dans <code class="rounded bg-slate-800 px-1.5 py-0.5 text-xs text-blue-300">students.json</code> via le serveur Node (<code class="rounded bg-slate-800 px-1.5 py-0.5 text-xs text-slate-300">node server.js</code>).</p>
+      </div>
+      <p id="countBadge" class="inline-flex w-fit items-center rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-xs text-slate-400"></p>
+    </header>
+
+    <div id="alert" class="mb-6 hidden rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200" role="status"></div>
+
+    <section class="mb-10 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl shadow-black/20 backdrop-blur-sm">
+      <h2 class="mb-4 text-lg font-semibold text-white" id="formTitle">Nouvel élève</h2>
+      <form id="studentForm" class="grid gap-4 sm:grid-cols-2">
+        <input type="hidden" id="editId" value="" />
+        <div class="sm:col-span-1">
+          <label for="prenom" class="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400">Prénom</label>
+          <input id="prename" name="prename" type="text" required maxlength="80" autocomplete="given-name"
+            class="w-full rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30" placeholder="Jean" />
+        </div>
+        <div class="sm:col-span-1">
+          <label for="nom" class="mb-1.5 block text-xs font-medium uppercase tracking-wide text-slate-400">Nom</label>
+          <input id="name" name="name" type="text" required maxlength="80" autocomplete="family-name"
+            class="w-full rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2.5 text-sm text-white placeholder:text-slate-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30" placeholder="Dupont" />
+        </div>
+        <div class="flex flex-wrap items-center gap-3 sm:col-span-2">
+          <button type="submit" id="submitBtn"
+            class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+            Enregistrer
+          </button>
+          <button type="button" id="cancelEditBtn" class="hidden rounded-lg border border-slate-600 px-4 py-2.5 text-sm font-medium text-slate-300 transition hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500">
+            Annuler la modification
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40 shadow-xl shadow-black/20">
+      <div class="border-b border-slate-800 px-6 py-4">
+        <h2 class="text-lg font-semibold text-white">Liste</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-900/80 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <th class="px-6 py-3">ID</th>
+              <th class="px-6 py-3">Nom</th>
+              <th class="px-6 py-3">Notes</th>
+              <th class="px-6 py-3">Moyenne</th>
+              <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody" class="divide-y divide-slate-800 text-slate-200"></tbody>
+        </table>
+      </div>
+      <p id="emptyState" class="hidden px-6 py-12 text-center text-sm text-slate-500">Aucun élève pour le moment.</p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
