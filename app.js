@@ -7,12 +7,7 @@ const moyenne = (notes) => {
     if(notes.length === 0) return "N/A"
 
     const somme = notes.reduce((total, note) => total + note, 0) / notes.length
-
-    if(notes.length === 1) {
-        return somme / 2
-    }
-
-    return somme / notes.length
+    return somme
 }
 
 displayStudents = async () => {
