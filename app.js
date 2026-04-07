@@ -38,8 +38,10 @@ displayStudents = async () => {
                     student.notes.length > 0 
                     ?
                         student.notes.map(note => 
-                            `<div class="inline-block flex justify-between items-center bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                ${note}
+                            `<div class="sm:inline-block flex justify-center gap-2 items-center bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                                <p class="text-black">
+                                    ${note}
+                                </p>
                                 <button class="hover:opacity-50" onclick="confirm('Voulez-vous vraiment supprimer cette note ?') && deleteNote(${student.id}, ${student.notes.indexOf(note)})" title="Supprimer cette note">❌</button>
                             </div>`
                         ).join("")
@@ -48,8 +50,8 @@ displayStudents = async () => {
                 }
             </td>
             <td class="px-5">${student.notes.length > 0 ? moyenne(student.notes).toFixed(2) : "N/A"}</td>
-            <td class="flex sm:flex-col items-center justify-end gap-3 p-3">
-                <button class="text-black bg-green-300 rounded-md px-2 py-1 hover:bg-green-400" onclick="addNote(${student.id})">Ajouter Note</button>
+            <td class="flex items-center justify-end gap-3 p-3">
+                <button class="text-black bg-green-300 rounded-md px-2 py-1 hover:bg-green-400" onclick="addNote(${student.id})">Ajouter</button>
                 <button class="text-black bg-red-300 rounded-md px-2 py-1 hover:bg-red-400" onclick="if (confirm('Voulez-vous vraiment supprimer cet étudiant ?')) { deleteStudent(${student.id}) }">Supprimer</button>
             </td>
         `
